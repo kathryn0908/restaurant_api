@@ -16,6 +16,16 @@ class Restaurant(models.Model):
     is_delivering_now = models.BooleanField()
     average_cost_for_two = models.PositiveIntegerField()
     highlights = JSONField()
+
+class Trending(models.Model):
+    image_url= models.TextField()
+    url= models.TextField()
+    title= models.TextField()
+    description= models.TextField()
+
+class User(models.Model):
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=50)
    
     
 

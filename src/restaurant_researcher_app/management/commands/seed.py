@@ -1,19 +1,32 @@
 from django.core.management.base import BaseCommand
 import requests
-from ...models import Restaurant
+from ...models import Restaurant, Trending
 
 class Command(BaseCommand):
   
   def handle(self, *args, **options):
+    clear_data()
+    get_trending_info()
     get_restaurant_info()
+    seed_trending()
     seed_restaurants()
     print("completed")
 
 def get_restaurant_info():
-  url = 'https://developers.zomato.com/api/v2.1/search?count=1&lat=39.742043&lon=-104.991531&radius=20mi'
+  url = 'https://developers.zomato.com/api/v2.1/search?count=50&lat=39.742043&lon=-104.991531&sort=rating'
   r = requests.get(url, headers={'Content-Type': 'application/json', "user-key": "0c1fc23671554a06d3ab8f20e69a1c95"})
   restaurant = r.json()
   return restaurant['restaurants']
+  
+  
+
+def get_trending_info():
+  url = 'https://developers.zomato.com/api/v2.1/collections?city_id=305&lat=39.742043&lon=-104.991531&count=20'
+  r = requests.get(url, headers={'Content-Type': 'application/json', "user-key": "0c1fc23671554a06d3ab8f20e69a1c95"})
+  trending = r.json()
+  return trending['collections']
+  # print(trending['collections'])
+  
 
 def seed_restaurants():
   for i in get_restaurant_info():
@@ -23,15 +36,27 @@ def seed_restaurants():
       cuisines=i['restaurant']['cuisines'],
       timings=i['restaurant']['timings'],
       url=i['restaurant']['url'],
-      address=i['restaurant']['location']['address']+','+i['restaurant']['location']['city'],
+      address=i['restaurant']['location']['address'],
       phone_number=i['restaurant']['phone_numbers'],
       has_online_delivery=i['restaurant']['has_online_delivery'],
       is_delivering_now=i['restaurant']['is_delivering_now'],
       average_cost_for_two=i['restaurant']['average_cost_for_two'] ,
-      highlights=i['restaurant']['highlights']
+      highlights=", ".join(i['restaurant']['highlights'])
   )
-  restaurant.save()
-  print('it works')
+    restaurant.save()
+  
+
+def seed_trending():
+  for i in get_trending_info():
+    trending= Trending(
+      image_url=i['collection']['image_url'],
+      url=i['collection']['url'],
+      title=i['collection']['title'],
+      description=i['collection']['description']
+  )
+    trending.save()
+
 
 def clear_data():
   Restaurant.objects.all().delete()
+  Trending.objects.all().delete()
