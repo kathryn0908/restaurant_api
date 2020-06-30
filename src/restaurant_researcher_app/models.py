@@ -14,8 +14,8 @@ class Restaurant(models.Model):
     url = models.TextField()
     address = models.TextField()
     phone_number = models.TextField()
-    has_online_delivery = models.BooleanField()
-    is_delivering_now = models.BooleanField()
+    has_online_delivery = models.TextField()
+    is_delivering_now = models.TextField()
     average_cost_for_two = models.PositiveIntegerField()
     highlights = JSONField()
 

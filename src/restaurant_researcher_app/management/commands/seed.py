@@ -2,21 +2,25 @@ from django.core.management.base import BaseCommand
 import requests
 from ...models import Restaurant, Trending
 
+original_restaurant_url = 'https://developers.zomato.com/api/v2.1/search?count=50&lat=39.742043&lon=-104.991531&sort=rating'
+
 class Command(BaseCommand):
   
   def handle(self, *args, **options):
-    clear_data()
-    get_trending_info()
+    # clear_data()
+    # get_trending_info()
     get_restaurant_info()
-    seed_trending()
+    # seed_trending()
     seed_restaurants()
     print("completed")
 
 def get_restaurant_info():
-  url = 'https://developers.zomato.com/api/v2.1/search?count=50&lat=39.742043&lon=-104.991531&sort=rating'
+  url = 'https://developers.zomato.com/api/v2.1/search?lat=39.742043&lon=-105.081505&radius=100'
   r = requests.get(url, headers={'Content-Type': 'application/json', "user-key": "0c1fc23671554a06d3ab8f20e69a1c95"})
   restaurant = r.json()
   return restaurant['restaurants']
+
+  
   
   
 
