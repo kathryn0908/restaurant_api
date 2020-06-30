@@ -62,8 +62,7 @@ class Review(models.Model):
         null=True,
         blank=True
     )
-
-    review = models.TextField(null=True, blank=True)
+    review = models.TextField(null=False)
 
     
 

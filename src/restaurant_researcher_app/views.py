@@ -36,6 +36,6 @@ class ReviewView(viewsets.ModelViewSet):
 class FavoriteView(viewsets.ModelViewSet):
     queryset = Favorite.objects.all()
     serializer_class = FavoriteSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
 
