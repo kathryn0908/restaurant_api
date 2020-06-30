@@ -32,6 +32,41 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+class Favorite(models.Model):
+    user = models.ForeignKey(
+        User, 
+        related_name="favorites", 
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True
+    )
+    restaurant = models.ForeignKey(
+        Restaurant,
+        related_name="favorites",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+class Review(models.Model):
+    user = models.ForeignKey(
+        User, 
+        related_name="reviews", 
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True
+    )
+    restaurant = models.ForeignKey(
+        Restaurant,
+        related_name="reviews",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    review = models.TextField(null=True, blank=True)
+
+    
+
 
     
 

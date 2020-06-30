@@ -22,5 +22,4 @@ urlpatterns = [
     path('', include('restaurant_researcher_app.urls')),
     path('auth/', include('rest_framework.urls')),
     path('login/', TokenObtainPairView.as_view()),
-    # path('signup/', SignUp.as_view()),
 ]

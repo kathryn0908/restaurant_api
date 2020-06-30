@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
-from .models import Restaurant, Trending, User
-from .serializers import RestaurantSerializer, TrendingSerializer, UserSerializer
+from .models import Restaurant, Trending, User, Review, Favorite
+from .serializers import RestaurantSerializer, TrendingSerializer, UserSerializer, ReviewSerializer, FavoriteSerializer
 
 
 
@@ -27,5 +27,15 @@ class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
+
+class ReviewView(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = (permissions.AllowAny,)
+
+class FavoriteView(viewsets.ModelViewSet):
+    queryset = Favorite.objects.all()
+    serializer_class = FavoriteSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 
