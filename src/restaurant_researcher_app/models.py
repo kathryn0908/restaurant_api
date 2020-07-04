@@ -1,6 +1,8 @@
 from jsonfield import JSONField
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
+from django.utils import timezone
+import datetime
 
 
 
@@ -18,6 +20,7 @@ class Restaurant(models.Model):
     is_delivering_now = models.TextField()
     average_cost_for_two = models.PositiveIntegerField()
     highlights = JSONField()
+    
 
 class Trending(models.Model):
     image_url= models.TextField()
@@ -48,21 +51,23 @@ class Favorite(models.Model):
         blank=True
     )
 class Review(models.Model):
+    review = models.TextField(null=True)
+    name = models.TextField(null=True)
     user = models.ForeignKey(
         User, 
         related_name="reviews", 
-        on_delete=models.CASCADE, 
-        null=True, 
-        blank=True
+        on_delete=models.CASCADE,
+        null=True 
     )
     restaurant = models.ForeignKey(
         Restaurant,
         related_name="reviews",
         on_delete=models.CASCADE,
-        null=True,
-        blank=True
+        null=True
     )
-    review = models.TextField(null=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    
+    
 
     
 

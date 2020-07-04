@@ -3,11 +3,10 @@ from . import models
 from django.contrib.auth.hashers import make_password
 
 class RestaurantSerializer(serializers.ModelSerializer):
-    reviews = serializers.CharField(required=False)
-    favorites = serializers.CharField(required=False)
     class Meta:
         model = models.Restaurant
         fields = ('id','thumb', 'name', 'cuisines', 'timings', 'url', 'address', 'phone_number', 'has_online_delivery', 'is_delivering_now', 'average_cost_for_two', 'highlights', 'favorites', 'reviews')
+        depth = 2
 
 class TrendingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,11 +14,10 @@ class TrendingSerializer(serializers.ModelSerializer):
         fields = ('id', 'image_url', 'url', 'title', 'description') 
           
 class UserSerializer(serializers.ModelSerializer):
-        reviews = serializers.CharField(required=False)
-        favorites = serializers.CharField(required=False)
         class Meta:
             model = models.User
             fields = ('id', 'username', 'email', 'password', 'favorites', 'reviews') 
+            depth = 2
             
             
         def create(self, validated_data):
@@ -41,7 +39,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
         class Meta:
             model = models.Review
-            fields = ()
+            fields = ('__all__')
 
 
    
