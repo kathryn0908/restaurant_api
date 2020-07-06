@@ -35,11 +35,17 @@ class FavoriteSerializer(serializers.ModelSerializer):
         class Meta:
             model = models.Favorite 
             fields = ('__all__') 
+            # depth = 2
 
 class ReviewSerializer(serializers.ModelSerializer):
         class Meta:
             model = models.Review
             fields = ('__all__')
+            
+class StarRatingSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = models.StarRating 
+            fields = ('id', 'value', 'user')
 
 
    

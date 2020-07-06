@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
-from .models import Restaurant, Trending, User, Review, Favorite
-from .serializers import RestaurantSerializer, TrendingSerializer, UserSerializer, ReviewSerializer, FavoriteSerializer
+from .models import Restaurant, Trending, User, Review, Favorite, StarRating
+from .serializers import RestaurantSerializer, TrendingSerializer, UserSerializer, ReviewSerializer, FavoriteSerializer, StarRatingSerializer
 
 
 
@@ -38,4 +38,8 @@ class FavoriteView(viewsets.ModelViewSet):
     serializer_class = FavoriteSerializer
     permission_classes = (permissions.AllowAny,)
 
+class StarRatingView(viewsets.ModelViewSet):
+    queryset = StarRating.objects.all()
+    serializer_class = StarRatingSerializer
+    permission_classes = (permissions.AllowAny,)
 

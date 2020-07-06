@@ -66,6 +66,15 @@ class Review(models.Model):
         null=True
     )
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+class StarRating(models.Model):
+    value = models.IntegerField()
+    user = models.ForeignKey(
+        User, 
+        related_name="ratings", 
+        on_delete=models.CASCADE,
+        null=True 
+    )
     
     
 
