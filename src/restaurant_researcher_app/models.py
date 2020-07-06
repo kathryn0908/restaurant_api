@@ -50,6 +50,7 @@ class Favorite(models.Model):
         null=True,
         blank=True
     )
+
 class Review(models.Model):
     review = models.TextField(null=True)
     name = models.TextField(null=True)
@@ -65,6 +66,8 @@ class Review(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
+    
+    rating = models.CharField(null=True, max_length=50)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 class StarRating(models.Model):
@@ -75,6 +78,16 @@ class StarRating(models.Model):
         on_delete=models.CASCADE,
         null=True 
     )
+    restaurant = models.ForeignKey(
+        Restaurant,
+        related_name="ratings",
+        on_delete=models.CASCADE,
+        null=True
+    )
+   
+    
+
+
     
     
 
