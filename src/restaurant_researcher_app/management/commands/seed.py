@@ -3,6 +3,19 @@ import requests
 from ...models import Restaurant, Trending
 
 original_restaurant_url = 'https://developers.zomato.com/api/v2.1/search?count=50&lat=39.742043&lon=-104.991531&sort=rating'
+second_url= 'https://developers.zomato.com/api/v2.1/search?lat=39.742043&lon=-105.081505&radius=100'
+third_url='https://developers.zomato.com/api/v2.1/search?count=100&lat=39.710835&lon=-104.812500&radius=50'
+fourth_url='https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=1&sort=real_distance'
+fifth_url = 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=678&sort=real_distance'
+sixth_url = 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=22&sort=real_distance'
+brunch_url = 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=125&sort=real_distance'
+bar_url = 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=306&sort=real_distance'
+mexican_url = 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=77&sort=real_distance'
+sushi_url = 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=65&sort=real_distance'
+beer_url = 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=446&sort=real_distance'
+vegan_url= 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=285&sort=real_distance'
+steak_url = 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=47&sort=real_distance'
+gluten_free ='https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=45&sort=real_distance'
 
 class Command(BaseCommand):
   
@@ -15,7 +28,7 @@ class Command(BaseCommand):
     print("completed")
 
 def get_restaurant_info():
-  url = 'https://developers.zomato.com/api/v2.1/search?lat=39.742043&lon=-105.081505&radius=100'
+  url = 'https://developers.zomato.com/api/v2.1/search?count=100&lat=39.579231&lon=-104.876694&radius=100&collection_id=47&sort=real_distance'
   r = requests.get(url, headers={'Content-Type': 'application/json', "user-key": "0c1fc23671554a06d3ab8f20e69a1c95"})
   restaurant = r.json()
   return restaurant['restaurants']
