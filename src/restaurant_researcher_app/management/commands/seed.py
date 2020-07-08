@@ -2,6 +2,8 @@ from django.core.management.base import BaseCommand
 import requests
 from ...models import Restaurant, Trending
 
+
+
 original_restaurant_url = 'https://developers.zomato.com/api/v2.1/search?count=50&lat=39.742043&lon=-104.991531&sort=rating'
 second_url= 'https://developers.zomato.com/api/v2.1/search?lat=39.742043&lon=-105.081505&radius=100'
 third_url='https://developers.zomato.com/api/v2.1/search?count=100&lat=39.710835&lon=-104.812500&radius=50'

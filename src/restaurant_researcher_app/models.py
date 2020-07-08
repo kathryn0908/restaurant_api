@@ -20,6 +20,7 @@ class Restaurant(models.Model):
     is_delivering_now = models.TextField()
     average_cost_for_two = models.PositiveIntegerField()
     highlights = JSONField()
+    images = JSONField(null=True)
     
 
 class Trending(models.Model):
